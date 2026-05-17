@@ -1,7 +1,7 @@
 use serde::{Serialize, Deserialize};
 use std::{collections::HashMap, fmt::Display};
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 pub enum Action {
     NavigateToEpicDetail { epic_id: u32 },
     NavigateToStoryDetail { epic_id: u32, story_id: u32 },

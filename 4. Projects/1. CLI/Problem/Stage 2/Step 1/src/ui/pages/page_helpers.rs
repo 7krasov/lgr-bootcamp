@@ -1,7 +1,31 @@
+use std::path::absolute;
 use ellipse::Ellipse;
 
 pub fn get_column_string(text: &str, width: usize) -> String {
-    todo!() // use the truncate_ellipse function from the ellipse crate
+    //todo!() // use the truncate_ellipse function from the ellipse crate
+
+    // if (text.len() > width) {
+    //     return text.truncate_ellipse(width).to_string();
+    // }
+
+    let text_length = text.len();
+
+    if (text_length < width) {
+        return format!("{}{}", text, " ".repeat(width - text_length));
+    }
+
+    if (text_length == width) {
+        return text.to_string();
+    }
+
+    //text_length > width
+
+    if (width <= 3) {
+        return ".".repeat(width);
+    }
+
+    let (part1, _) = text.split_at(width - 3);
+    format!("{}{}", part1, ".".repeat(3).as_str())
 }
 
 #[cfg(test)]
