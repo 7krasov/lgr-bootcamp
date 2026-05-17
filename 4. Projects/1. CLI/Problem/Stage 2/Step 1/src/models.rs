@@ -15,7 +15,7 @@ pub enum Action {
     Exit,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Eq, Debug, Clone)]
+#[derive(Serialize, Deserialize, PartialEq, Eq, Debug, Clone, PartialOrd, Ord)]
 pub enum Status {
     Open,
     InProgress,
@@ -25,11 +25,16 @@ pub enum Status {
 
 impl Display for Status {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        todo!()
+        match self {
+            Status::Open => f.write_str("OPEN"),
+            Status::InProgress => f.write_str("IN PROGRESS"),
+            Status::Resolved => f.write_str("RESOLVED"),
+            Status::Closed => f.write_str("CLOSED"),
+        }
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Eq, Debug, Clone)]
+#[derive(Serialize, Deserialize, PartialEq, Eq, Debug, Clone, PartialOrd, Ord)]
 pub struct Epic {
     pub name: String,
     pub description: String,
@@ -48,7 +53,7 @@ impl Epic {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Eq, Debug, Clone)]
+#[derive(Serialize, Deserialize, PartialEq, Eq, Debug, Clone, PartialOrd, Ord)]
 pub struct Story {
     pub name: String,
     pub description: String,

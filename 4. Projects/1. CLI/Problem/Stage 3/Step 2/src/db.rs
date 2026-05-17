@@ -97,7 +97,7 @@ pub trait Database {
     fn write_db(&self, db_state: &DBState) -> Result<()>;
 }
 
-struct JSONFileDatabase {
+    struct JSONFileDatabase {
     pub file_path: String
 }
 
