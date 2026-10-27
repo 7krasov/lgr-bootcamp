@@ -1,3 +1,6 @@
+use std::fmt::{Debug, Display, Formatter, Pointer};
+use axum::http::StatusCode;
+use axum::response::IntoResponse;
 use crate::{
     models::{Answer, AnswerDetail, AnswerId, DBError, Question, QuestionDetail, QuestionId},
     persistance::{answers_dao::AnswersDao, questions_dao::QuestionsDao},
@@ -12,6 +15,17 @@ pub enum HandlerError {
 impl HandlerError {
     pub fn default_internal_error() -> Self {
         HandlerError::InternalError("Something went wrong! Please try again.".to_owned())
+    }
+}
+
+impl IntoResponse for HandlerError {
+    fn into_response(self) -> axum::response::Response {
+        match self {
+            HandlerError::BadRequest(msg) => (StatusCode::BAD_REQUEST, msg).into_response(),
+            HandlerError::InternalError(msg) => {
+                (StatusCode::INTERNAL_SERVER_ERROR, msg).into_response()
+            }
+        }
     }
 }
 

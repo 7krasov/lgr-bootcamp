@@ -30,14 +30,14 @@ async fn main() {
         .expect("Failed to create Postgres connection pool!");
 
     // TODO: Delete this query
-    let recs = sqlx::query!("SELECT * FROM questions")
-        .fetch_all(&pool)
-        .await
-        .unwrap();
+    // let recs = sqlx::query!("SELECT * FROM questions")
+    //     .fetch_all(&pool)
+    //     .await
+    //     .unwrap();
 
     // TODO: Delete these log statements
-    info!("********* Question Records *********");
-    info!("{:?}", recs);
+    // info!("********* Question Records *********");
+    // info!("{:?}", recs);
 
     let app = Router::new()
         .route("/question", post(create_question))
